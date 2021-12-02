@@ -1,5 +1,7 @@
 package ru.geekbrains.mvp.view
 
 interface MainView {
-    fun setButtonText(index: Int, text: String)
+    fun setFirstButtonText(text: String)
+    fun setSecondButtonText(text : String)
+    fun setThirdButtonText(text : String)
 }
