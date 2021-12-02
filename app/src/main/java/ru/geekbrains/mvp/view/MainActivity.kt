@@ -15,13 +15,19 @@ class MainActivity : AppCompatActivity(), MainView {
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb?.root)
 
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
+        val listenerFirst = View.OnClickListener {
+            presenter.counterClick(0)
+        }
+        val listenerSecond = View.OnClickListener {
+            presenter.counterClick(1)
+        }
+        val listenerThird = View.OnClickListener {
+            presenter.counterClick(2)
         }
 
-        vb?.btnCounter1?.setOnClickListener(listener)
-        vb?.btnCounter2?.setOnClickListener(listener)
-        vb?.btnCounter3?.setOnClickListener(listener)
+        vb?.btnCounter1?.setOnClickListener(listenerFirst)
+        vb?.btnCounter2?.setOnClickListener(listenerSecond)
+        vb?.btnCounter3?.setOnClickListener(listenerThird)
     }
 
     override fun setFirstButtonText(text: String) {
