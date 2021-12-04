@@ -44,4 +44,3 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         vb?.btnCounter3?.text = text
     }
 }
-
