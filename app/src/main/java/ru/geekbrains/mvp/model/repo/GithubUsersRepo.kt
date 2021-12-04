@@ -4,11 +4,11 @@ import ru.geekbrains.mvp.model.GithubUser
 
 class GithubUsersRepo {
     private val repositories = listOf (
-        GithubUser("login1"),
-        GithubUser("login2"),
-        GithubUser("login3"),
-        GithubUser("login4"),
-        GithubUser("login5")
+        GithubUser("Lion El'Jonson"),
+        GithubUser("Leman Russ"),
+        GithubUser("Rogal Dorn"),
+        GithubUser("Ferrus Manus"),
+        GithubUser("Roboute Guilliman")
     )
 
     fun getUsers() : List<GithubUser> {
