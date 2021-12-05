@@ -1,39 +1,18 @@
 package ru.geekbrains.mvp.presenter
 
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
-import ru.geekbrains.mvp.model.GithubUser
-import ru.geekbrains.mvp.model.repo.GithubUsersRepo
 import ru.geekbrains.mvp.view.MainView
-import ru.geekbrains.mvp.view.UserItemView
 
-class MainPresenter (private val usersRepo: GithubUsersRepo) : MvpPresenter<MainView>() {
-    class UsersListPresenter : UserListPresenter {
-        val users = mutableListOf<GithubUser>()
-        override var itemClickListener: ((UserItemView) -> Unit)? = null
-
-        override fun getCount() = users.size
-
-        override fun bindView(view: UserItemView) {
-            val user = users[view.pos]
-            view.setLogin(user.login)
-        }
-    }
-
-    val usersListPresenter = UsersListPresenter()
+class MainPresenter(private val router: Router, private val screens: Screens) :
+    MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.init()
-        loadData()
-
-        usersListPresenter.itemClickListener = {
-            //TODO: переход на экран пользователя
-        }
+        router.replaceScreen(screens.users())
     }
 
-    private fun loadData() {
-        val users =  usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+    fun backClicked() {
+        router.exit()
     }
 }
