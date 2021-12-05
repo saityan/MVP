@@ -1,46 +1,34 @@
 package ru.geekbrains.mvp.view
 
 import android.os.Bundle
-import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.mvp.databinding.ActivityMainBinding
-import ru.geekbrains.mvp.model.CountersModel
+import ru.geekbrains.mvp.model.repo.GithubUsersRepo
 import ru.geekbrains.mvp.presenter.MainPresenter
+import ru.geekbrains.mvp.presenter.UsersRVAdapter
 
 class MainActivity : MvpAppCompatActivity(), MainView {
+
+    private val presenter by moxyPresenter { MainPresenter(GithubUsersRepo()) }
+    private var adapter: UsersRVAdapter? = null
+
     private var vb: ActivityMainBinding? = null
-    private val presenter by moxyPresenter {
-        MainPresenter(CountersModel())
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb?.root)
-
-        val listenerFirst = View.OnClickListener {
-            presenter.counterClick(0)
-        }
-        val listenerSecond = View.OnClickListener {
-            presenter.counterClick(1)
-        }
-        val listenerThird = View.OnClickListener {
-            presenter.counterClick(2)
-        }
-
-        vb?.btnCounter1?.setOnClickListener(listenerFirst)
-        vb?.btnCounter2?.setOnClickListener(listenerSecond)
-        vb?.btnCounter3?.setOnClickListener(listenerThird)
     }
 
-    override fun setFirstButtonText(text: String) {
-        vb?.btnCounter1?.text = text
+    override fun init() {
+        vb?.rvUsers?.layoutManager = LinearLayoutManager(this)
+        adapter = UsersRVAdapter(presenter.usersListPresenter)
+        vb?.rvUsers?.adapter = adapter
     }
-    override fun setSecondButtonText(text: String) {
-        vb?.btnCounter2?.text = text
-    }
-    override fun setThirdButtonText(text: String) {
-        vb?.btnCounter3?.text = text
+
+    override fun updateList() {
+        adapter?.notifyDataSetChanged()
     }
 }
