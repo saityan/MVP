@@ -13,7 +13,7 @@ import ru.geekbrains.mvp.presenter.MainPresenter
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    val navigator = AppNavigator(this, R.id.container)
+    private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter {
         MainPresenter(App.instance.router, AndroidScreens())

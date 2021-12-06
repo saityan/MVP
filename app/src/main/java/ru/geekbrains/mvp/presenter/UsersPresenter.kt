@@ -33,7 +33,7 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
         }
     }
 
-    fun loadData() {
+    private fun loadData() {
         val users = usersRepo.getUsers()
         usersListPresenter.users.addAll(users)
         viewState.updateList()
