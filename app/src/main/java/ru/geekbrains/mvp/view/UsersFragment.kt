@@ -10,7 +10,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.mvp.App
 import ru.geekbrains.mvp.databinding.FragmentUsersBinding
-import ru.geekbrains.mvp.model.repo.GithubUsersRepo
+import ru.geekbrains.mvp.model.repo.GithubUsersRepoImpl
 import ru.geekbrains.mvp.presenter.BackButtonListener
 import ru.geekbrains.mvp.presenter.UsersPresenter
 import ru.geekbrains.mvp.presenter.UsersRVAdapter
@@ -21,7 +21,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepo(), App.instance.router)
+        UsersPresenter(GithubUsersRepoImpl(), App.instance.router)
     }
     private var adapter: UsersRVAdapter? = null
 

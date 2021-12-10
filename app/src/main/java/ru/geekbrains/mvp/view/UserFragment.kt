@@ -3,13 +3,18 @@ package ru.geekbrains.mvp.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
 import ru.geekbrains.mvp.databinding.FragmentUserBinding
 import ru.geekbrains.mvp.presenter.BackButtonListener
 
 class UserFragment : MvpAppCompatFragment(), BackButtonListener {
     companion object {
-        fun newInstance() = UserFragment()
+        fun newInstance(userLogin: String) : Fragment = UserFragment().apply {
+            arguments = Bundle().apply {
+                putString("USER_LOGIN", userLogin)
+            }
+        }
     }
 
     private var vb: FragmentUserBinding? = null

@@ -3,11 +3,11 @@ package ru.geekbrains.mvp.presenter
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import ru.geekbrains.mvp.model.GithubUser
-import ru.geekbrains.mvp.model.repo.GithubUsersRepo
+import ru.geekbrains.mvp.model.repo.GithubUsersRepoImpl
 import ru.geekbrains.mvp.view.UserItemView
 import ru.geekbrains.mvp.view.UsersView
 
-class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router: Router) :
+class UsersPresenter(private val usersRepo: GithubUsersRepoImpl, private val router: Router) :
     MvpPresenter<UsersView>() {
     class UsersListPresenter : UserListPresenter {
         val users = mutableListOf<GithubUser>()
@@ -27,10 +27,6 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router:
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-
-        usersListPresenter.itemClickListener = { itemView ->
-
-        }
     }
 
     private fun loadData() {

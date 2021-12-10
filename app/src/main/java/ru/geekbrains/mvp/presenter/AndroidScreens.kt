@@ -8,7 +8,7 @@ class AndroidScreens : Screens {
     override fun users() = FragmentScreen {
         UsersFragment.newInstance()
     }
-    override fun user() = FragmentScreen {
-        UserFragment.newInstance()
+    override fun user(userLogin: String) = FragmentScreen {
+        UserFragment.newInstance(userLogin)
     }
 }
