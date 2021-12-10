@@ -19,6 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         MainPresenter(App.instance.router, AndroidScreens())
     }
     private var vb: ActivityMainBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vb = ActivityMainBinding.inflate(layoutInflater)

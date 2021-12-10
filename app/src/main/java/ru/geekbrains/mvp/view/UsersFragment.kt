@@ -1,7 +1,9 @@
 package ru.geekbrains.mvp.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
@@ -29,6 +31,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         FragmentUsersBinding.inflate(inflater, container, false).also {
             vb = it
         }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("myLogs", "2")
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
