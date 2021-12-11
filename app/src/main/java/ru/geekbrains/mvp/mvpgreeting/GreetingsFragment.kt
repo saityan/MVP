@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.mvpuser
+package ru.geekbrains.mvp.mvpgreeting
 
 import android.os.Bundle
 import android.view.View

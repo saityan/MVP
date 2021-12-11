@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.mvpusers
+package ru.geekbrains.mvp.mvpauthorization
 
 import android.os.Bundle
 import android.view.View
