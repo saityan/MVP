@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.view.navigation
+package ru.geekbrains.mvp.navigation
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

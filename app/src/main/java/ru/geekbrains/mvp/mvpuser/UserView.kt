@@ -1,8 +1,8 @@
-package ru.geekbrains.mvp.view
+package ru.geekbrains.mvp.mvpuser
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.SingleState
-import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.data.GitHubUser
 
 interface UserView : MvpView {
     @SingleState

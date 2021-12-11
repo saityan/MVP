@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.model.repo
+package ru.geekbrains.mvp.data
 
 interface GitHubUserRepository {
     fun getUsers(): List<GitHubUser>

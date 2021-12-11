@@ -1,9 +1,8 @@
-package ru.geekbrains.mvp.presenter
+package ru.geekbrains.mvp.mvpuser
 
 import moxy.MvpPresenter
-import ru.geekbrains.mvp.model.repo.GitHubUserRepository
-import ru.geekbrains.mvp.view.UserView
-import ru.geekbrains.mvp.view.navigation.CustomRouter
+import ru.geekbrains.mvp.data.GitHubUserRepository
+import ru.geekbrains.mvp.navigation.CustomRouter
 
 class UserPresenter(
     private val userLogin: String,

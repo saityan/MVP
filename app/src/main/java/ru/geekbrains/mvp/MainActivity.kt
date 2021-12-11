@@ -1,12 +1,11 @@
-package ru.geekbrains.mvp.view
+package ru.geekbrains.mvp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.geekbrains.mvp.App.Navigation.navigatorHolder
 import ru.geekbrains.mvp.App.Navigation.router
-import ru.geekbrains.mvp.R
-import ru.geekbrains.mvp.presenter.UsersScreen
-import ru.geekbrains.mvp.view.navigation.CustomNavigator
+import ru.geekbrains.mvp.mvpusers.UsersScreen
+import ru.geekbrains.mvp.navigation.CustomNavigator
 
 class MainActivity : AppCompatActivity() {
     private val navigator = CustomNavigator(activity = this, R.id.content)

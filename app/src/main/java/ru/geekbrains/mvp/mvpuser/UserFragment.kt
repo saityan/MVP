@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.view
+package ru.geekbrains.mvp.mvpuser
 
 import android.os.Bundle
 import android.view.View
@@ -7,10 +7,9 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.mvp.App.Navigation.router
 import ru.geekbrains.mvp.R
+import ru.geekbrains.mvp.data.GitHubUser
+import ru.geekbrains.mvp.data.GitHubUserRepositoryFactory
 import ru.geekbrains.mvp.databinding.ViewUserBinding
-import ru.geekbrains.mvp.model.repo.GitHubUser
-import ru.geekbrains.mvp.model.repo.GitHubUserRepositoryFactory
-import ru.geekbrains.mvp.presenter.UserPresenter
 
 class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
     private lateinit var viewBinding: ViewUserBinding

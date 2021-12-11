@@ -1,8 +1,8 @@
-package ru.geekbrains.mvp.view.recycler
+package ru.geekbrains.mvp.recycler
 
 import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.mvp.databinding.ViewUserBinding
-import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.data.GitHubUser
 
 class UserViewHolder(private val viewBinding: ViewUserBinding): RecyclerView.ViewHolder(viewBinding.root) {
 

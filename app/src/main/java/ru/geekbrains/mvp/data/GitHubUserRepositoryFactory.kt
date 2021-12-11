@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.model.repo
+package ru.geekbrains.mvp.data
 
 object GitHubUserRepositoryFactory {
 

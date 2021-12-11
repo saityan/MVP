@@ -1,10 +1,10 @@
-package ru.geekbrains.mvp.view.recycler
+package ru.geekbrains.mvp.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.geekbrains.mvp.databinding.ViewUserBinding
-import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.data.GitHubUser
 
 class UsersAdapter(private val onUserClickListener: OnUserClickListener?):
     ListAdapter<GitHubUser, UserViewHolder>(UserDiff()) {

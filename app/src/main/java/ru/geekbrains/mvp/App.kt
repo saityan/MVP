@@ -2,7 +2,7 @@ package ru.geekbrains.mvp
 
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
-import ru.geekbrains.mvp.view.navigation.CustomRouter
+import ru.geekbrains.mvp.navigation.CustomRouter
 
 class App: Application() {
 

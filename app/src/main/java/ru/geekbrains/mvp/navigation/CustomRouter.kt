@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.view.navigation
+package ru.geekbrains.mvp.navigation
 
 import com.github.terrakok.cicerone.Router
 
