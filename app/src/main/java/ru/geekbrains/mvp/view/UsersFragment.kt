@@ -1,56 +1,44 @@
 package ru.geekbrains.mvp.view
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.geekbrains.mvp.App
-import ru.geekbrains.mvp.databinding.FragmentUsersBinding
-import ru.geekbrains.mvp.model.repo.GithubUsersRepoImpl
-import ru.geekbrains.mvp.presenter.BackButtonListener
+import ru.geekbrains.mvp.App.Navigation.router
+import ru.geekbrains.mvp.R
+import ru.geekbrains.mvp.databinding.ViewUsersBinding
+import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.model.repo.GitHubUserRepositoryFactory
 import ru.geekbrains.mvp.presenter.UsersPresenter
-import ru.geekbrains.mvp.presenter.UsersRVAdapter
+import ru.geekbrains.mvp.view.recycler.UsersAdapter
 
-class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
-    companion object {
-        fun newInstance() = UsersFragment()
+class UsersFragment: MvpAppCompatFragment(R.layout.view_users), UsersView, UsersAdapter.OnUserClickListener {
+
+    private val presenter: UsersPresenter by moxyPresenter {
+        UsersPresenter(
+            userRepository = GitHubUserRepositoryFactory.create(),
+            router = router
+        )
     }
 
-    val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepoImpl(), App.instance.router)
-    }
-    private var adapter: UsersRVAdapter? = null
-
-    private var vb: FragmentUsersBinding? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        FragmentUsersBinding.inflate(inflater, container, false).also {
-            vb = it
-        }.root
+    private val usersAdapter = UsersAdapter(this)
+    private lateinit var viewBinging: ViewUsersBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("myLogs", "2")
+        viewBinging = ViewUsersBinding.bind(view)
+        viewBinging.usersRecycler.adapter = usersAdapter
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        vb = null
+    override fun showUsers(users: List<GitHubUser>) {
+        usersAdapter.submitList(users)
     }
 
-    override fun init() {
-        vb?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
-        vb?.rvUsers?.adapter = adapter
-    }
+    override fun onUserPicked(user: GitHubUser) =
+        presenter.displayUser(user)
 
-    override fun updateList() {
-        adapter?.notifyDataSetChanged()
+    companion object {
+        fun newInstance(): Fragment = UsersFragment()
     }
-
-    override fun backPressed() = presenter.backPressed()
 }

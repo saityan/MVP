@@ -1,34 +1,49 @@
 package ru.geekbrains.mvp.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.View
 import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
-import ru.geekbrains.mvp.databinding.FragmentUserBinding
-import ru.geekbrains.mvp.presenter.BackButtonListener
+import moxy.ktx.moxyPresenter
+import ru.geekbrains.mvp.App.Navigation.router
+import ru.geekbrains.mvp.R
+import ru.geekbrains.mvp.databinding.ViewUserBinding
+import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.model.repo.GitHubUserRepositoryFactory
+import ru.geekbrains.mvp.presenter.UserPresenter
 
-class UserFragment : MvpAppCompatFragment(), BackButtonListener {
+class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
+    private lateinit var viewBinding: ViewUserBinding
+
+    private val userLogin: String by lazy {
+        arguments?.getString(ARG_USER_LOGIN).orEmpty()
+    }
+
+    private val presenter: UserPresenter by moxyPresenter {
+        UserPresenter(
+            userLogin = userLogin,
+            userRepository = GitHubUserRepositoryFactory.create(),
+            router = router
+        )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding = ViewUserBinding.bind(view)
+    }
+
+    override fun showUser(user: GitHubUser) {
+        viewBinding.userLogin.text = user.login
+    }
+
     companion object {
-        fun newInstance(userLogin: String) : Fragment = UserFragment().apply {
-            arguments = Bundle().apply {
-                putString("USER_LOGIN", userLogin)
+        private const val ARG_USER_LOGIN = "arg_user_login"
+
+        fun newInstance(userId: String): Fragment =
+            UserFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_USER_LOGIN, userId)
+                }
             }
-        }
     }
-
-    private var vb: FragmentUserBinding? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        FragmentUserBinding.inflate(inflater, container, false).also {
-            vb = it
-            it.userLogin.text = "1"
-        }.root
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        vb = null
-    }
-
-    override fun backPressed() = false
 }

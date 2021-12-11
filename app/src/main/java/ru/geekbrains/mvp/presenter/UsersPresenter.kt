@@ -1,42 +1,22 @@
 package ru.geekbrains.mvp.presenter
 
-import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
-import ru.geekbrains.mvp.model.GithubUser
-import ru.geekbrains.mvp.model.repo.GithubUsersRepoImpl
-import ru.geekbrains.mvp.view.UserItemView
+import ru.geekbrains.mvp.model.repo.GitHubUser
+import ru.geekbrains.mvp.model.repo.GitHubUserRepository
 import ru.geekbrains.mvp.view.UsersView
+import ru.geekbrains.mvp.view.navigation.CustomRouter
 
-class UsersPresenter(private val usersRepo: GithubUsersRepoImpl, private val router: Router) :
-    MvpPresenter<UsersView>() {
-    class UsersListPresenter : UserListPresenter {
-        val users = mutableListOf<GithubUser>()
-        override var itemClickListener: ((UserItemView) -> Unit)? = null
-
-        override fun getCount() = users.size
-
-        override fun bindView(view: UserItemView) {
-            val user = users[view.pos]
-            view.setLogin(user.login)
-        }
-    }
-
-    val usersListPresenter = UsersListPresenter()
+class UsersPresenter(
+    private val userRepository: GitHubUserRepository,
+    private val router: CustomRouter
+): MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewState.init()
-        loadData()
+        userRepository
+            .getUsers()
+            .let(viewState::showUsers)
     }
 
-    private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
-    }
-
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
-    }
+    fun displayUser(user: GitHubUser) =
+        router.navigateTo(UserScreen(user.login))
 }
