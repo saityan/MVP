@@ -18,9 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            router.navigateTo(AuthorizationScreen)
-        }
+        router.navigateTo(AuthorizationScreen)
     }
 
     override fun onPause() {

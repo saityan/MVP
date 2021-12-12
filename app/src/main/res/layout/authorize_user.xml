@@ -29,19 +29,21 @@
         android:id="@+id/user_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/user_login"
         android:layout_marginTop="10dp"
+        android:hint="@string/login_placeholder"
+        android:minHeight="48dp"
         android:textAlignment="center"
-        android:hint="@string/login_placeholder"/>
+        app:layout_constraintTop_toBottomOf="@id/user_login" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/user_password_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/user_login_form"
         android:layout_marginTop="20dp"
+        android:hint="@string/user_password"
+        android:minHeight="48dp"
         android:textAlignment="center"
-        android:hint="@string/user_password"/>
+        app:layout_constraintTop_toBottomOf="@id/user_login_form" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_user_info"

@@ -17,6 +17,7 @@ class GreetingsFragment : MvpAppCompatFragment(R.layout.greet_user) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding = GreetUserBinding.bind(view)
+        viewBinding.userGreeting.text = "Greetings"
     }
 
     companion object {
