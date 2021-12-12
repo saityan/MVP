@@ -5,7 +5,8 @@
     <string name="counter_three">Счетчик 3</string>
     <string name="null_counter">0</string>
     <string name="login_form_header">Please enter your login and password in the form below:</string>
-    <string name="login_placeholder">Login</string>
+    <string name="login_placeholder">Login (latin letters and numbers only)</string>
     <string name="user_password">Password</string>
     <string name="user_authorization_submit">SUBMIT</string>
+    <string name="user_authorization_complaint">Please note that password should contain at least 6 symbols, including: an upper case letter, a lower case letter, a number and a special symbol).</string>
 </resources>

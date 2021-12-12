@@ -1,9 +1,39 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/user_greeting"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:textSize="24sp"
-    android:textColor="@android:color/black"
-    tools:text="Greetings, imperial citizens"/>
+    android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Greetings, imperial citizens"/>
+
+    <ImageView
+        android:id="@+id/greeting_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/user_greeting"
+        app:layout_constraintBottom_toTopOf="@id/user_greeting_guideline"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/greeting"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/user_greeting_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+</androidx.constraintlayout.widget.ConstraintLayout>

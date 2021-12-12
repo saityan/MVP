@@ -1,7 +1,6 @@
 package ru.geekbrains.mvp.mvpauthorization
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
@@ -23,12 +22,12 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("myLogs", "View created")
         viewBinding = AuthorizeUserBinding.bind(view)
         viewBinding.submitUserInfo.setOnClickListener {
             login = viewBinding.userLoginForm.text.toString()
-            password = viewBinding.userLoginForm.text.toString()
+            password = viewBinding.userPasswordForm.text.toString()
             sendData(login, password)
+            viewBinding.userPasswordForm.setText("")
         }
     }
 
@@ -37,6 +36,7 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
     }
 
     override fun sendData(login: String, password: String) {
-        presenter.checkData(login, password)
+        if(presenter.checkData(login, password))
+            viewBinding.userDataComplaint.visibility = View.VISIBLE
     }
 }
