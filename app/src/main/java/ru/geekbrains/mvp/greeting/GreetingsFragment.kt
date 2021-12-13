@@ -20,15 +20,10 @@ class GreetingsFragment : MvpAppCompatFragment(R.layout.greet_user) {
         viewBinding = GreetUserBinding.bind(view)
         viewBinding.userGreeting.text = "Greetings, $userLogin!"
         imageAlias?.let {
-            try {
-                viewBinding.greetingImage.setImageResource(
-                    resources
-                        .getIdentifier(imageAlias, "drawable", requireContext().packageName)
-                )
-            }
-            catch (e: Exception) {
-                viewBinding.userGreeting.text = "Greetings, $userLogin!\nError: image not found!"
-            }
+            viewBinding.greetingImage.setImageResource(
+                resources
+                    .getIdentifier(imageAlias, "drawable", requireContext().packageName)
+            )
         }
     }
 
