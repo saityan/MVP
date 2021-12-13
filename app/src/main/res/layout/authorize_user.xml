@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf = "@id/user_login_guideline"
         android:text="@string/user_authorization_complaint"
+        android:layout_marginBottom="10dp"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:visibility="invisible"

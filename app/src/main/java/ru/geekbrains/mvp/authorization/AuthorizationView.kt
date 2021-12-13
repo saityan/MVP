@@ -1,7 +1,8 @@
-package ru.geekbrains.mvp.mvpauthorization
+package ru.geekbrains.mvp.authorization
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.SingleState
+import ru.geekbrains.mvp.user.GitHubUser
 
 interface AuthorizationView : MvpView {
     @SingleState

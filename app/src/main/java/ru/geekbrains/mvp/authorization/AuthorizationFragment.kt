@@ -1,4 +1,4 @@
-package ru.geekbrains.mvp.mvpauthorization
+package ru.geekbrains.mvp.authorization
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import moxy.ktx.moxyPresenter
 import ru.geekbrains.mvp.App.Navigation.router
 import ru.geekbrains.mvp.R
 import ru.geekbrains.mvp.databinding.AuthorizeUserBinding
+import ru.geekbrains.mvp.user.GitHubUserRepositoryFactory
 
 class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), AuthorizationView {
 
@@ -15,10 +16,14 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
     private var password = ""
 
     private val presenter: AuthorizationPresenter by moxyPresenter {
-        AuthorizationPresenter(router = router)
+        AuthorizationPresenter(
+            router = router,
+            userRepository = GitHubUserRepositoryFactory.create(),
+            view = this
+        )
     }
 
-    private lateinit var viewBinding: AuthorizeUserBinding
+    lateinit var viewBinding: AuthorizeUserBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +41,6 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
     }
 
     override fun sendData(login: String, password: String) {
-        if(presenter.checkData(login, password))
-            viewBinding.userDataComplaint.visibility = View.VISIBLE
+        presenter.checkData(login, password)
     }
 }

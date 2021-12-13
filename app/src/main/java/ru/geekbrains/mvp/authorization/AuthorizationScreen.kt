@@ -1,10 +1,12 @@
-package ru.geekbrains.mvp.mvpgreeting
+package ru.geekbrains.mvp.authorization
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-class GreetingsScreen(private val userLogin: String): FragmentScreen {
+object AuthorizationScreen: FragmentScreen {
+
     override fun createFragment(factory: FragmentFactory): Fragment =
-        GreetingsFragment.newInstance(userLogin)
+        AuthorizationFragment.newInstance()
+
 }
