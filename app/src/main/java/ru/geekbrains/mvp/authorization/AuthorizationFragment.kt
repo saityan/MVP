@@ -1,7 +1,6 @@
 package ru.geekbrains.mvp.authorization
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
@@ -41,9 +40,12 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
     }
 
     override fun sendData(login: String, password: String) {
-        if(presenter.checkData(login, password))
-            viewBinding.userDataComplaint.visibility = View.VISIBLE
-        else
-            viewBinding.userDataComplaint.visibility = View.INVISIBLE
+        presenter.checkData(login, password)
+
+    }
+
+    override fun setErrorState(errorFlag: Boolean) {
+        if (errorFlag) viewBinding.userDataComplaint.visibility = View.VISIBLE
+        else viewBinding.userDataComplaint.visibility = View.INVISIBLE
     }
 }

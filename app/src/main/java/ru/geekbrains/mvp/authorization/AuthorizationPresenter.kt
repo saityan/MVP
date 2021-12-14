@@ -13,24 +13,21 @@ class AuthorizationPresenter(
     private val userRepository: GitHubUserRepository,
 ) : MvpPresenter<AuthorizationView>() {
 
-    fun checkData(login: String, password: String) : Boolean {
-        val user = user@ {
-            userRepository.getUsers()
-                .flatMap { userRepository.getUserByLogin(login) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { result ->
-                        if (result.password == password) {
-                            router.navigateTo(GreetingsScreen(
-                                login,
-                                login.filter { it.isLetterOrDigit() }.lowercase(Locale.ENGLISH)))
-                        }
-                    },
-                    { throwable -> },
-                )
-            return@user true
-        }
-        return user()
+    fun checkData(login: String, password: String) {
+        userRepository.getUsers()
+            .flatMap { userRepository.getUserByLogin(login) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    if (result.password == password) {
+                        router.navigateTo(GreetingsScreen(
+                            login,
+                            login.filter { it.isLetterOrDigit() }.lowercase(Locale.ENGLISH)))
+                        viewState.setErrorState(false)
+                    } else viewState.setErrorState(true)
+                },
+                { throwable -> viewState.setErrorState(true)},
+            )
     }
 }
