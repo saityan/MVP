@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
 import ru.geekbrains.mvp.R
 import ru.geekbrains.mvp.databinding.GreetUserBinding
-import java.lang.Exception
 
 class GreetingsFragment : MvpAppCompatFragment(R.layout.greet_user) {
     private lateinit var viewBinding: GreetUserBinding

@@ -1,6 +1,7 @@
 package ru.geekbrains.mvp.authorization
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import moxy.MvpAppCompatFragment
@@ -19,11 +20,10 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
         AuthorizationPresenter(
             router = router,
             userRepository = GitHubUserRepositoryFactory.create(),
-            view = this
         )
     }
 
-    lateinit var viewBinding: AuthorizeUserBinding
+    private lateinit var viewBinding: AuthorizeUserBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +41,9 @@ class AuthorizationFragment: MvpAppCompatFragment(R.layout.authorize_user), Auth
     }
 
     override fun sendData(login: String, password: String) {
-        presenter.checkData(login, password)
+        if(presenter.checkData(login, password))
+            viewBinding.userDataComplaint.visibility = View.VISIBLE
+        else
+            viewBinding.userDataComplaint.visibility = View.INVISIBLE
     }
 }
