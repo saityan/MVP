@@ -1,12 +1,12 @@
-package ru.geekbrains.mvp.authorization
+package ru.geekbrains.mvp.square
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-object AuthorizationScreen: FragmentScreen {
+object SquareScreen: FragmentScreen {
 
     override fun createFragment(factory: FragmentFactory): Fragment =
-        AuthorizationFragment.newInstance()
+        SquareFragment.newInstance()
 
 }
