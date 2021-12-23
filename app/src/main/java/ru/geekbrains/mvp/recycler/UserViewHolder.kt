@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.geekbrains.mvp.data.GitHubUser
 import ru.geekbrains.mvp.databinding.ViewUserBinding
-import ru.geekbrains.mvp.recycler.UsersAdapter
 
 class UserViewHolder(private val viewBinding: ViewUserBinding): RecyclerView.ViewHolder(viewBinding.root) {
 

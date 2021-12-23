@@ -12,5 +12,4 @@ interface UserView : MvpView {
      */
     @SingleState
     fun showUser(user: GitHubUser)
-
 }

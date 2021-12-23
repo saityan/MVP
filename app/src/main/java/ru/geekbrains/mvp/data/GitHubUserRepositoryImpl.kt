@@ -2,8 +2,6 @@ package ru.geekbrains.mvp.data
 
 import GitHubApiFactory
 import io.reactivex.rxjava3.core.Single
-import ru.geekbrains.mvp.data.GitHubUser
-import ru.geekbrains.mvp.data.GitHubUserRepository
 
 class GitHubUserRepositoryImpl : GitHubUserRepository {
 
@@ -13,7 +11,7 @@ class GitHubUserRepositoryImpl : GitHubUserRepository {
          return gitHubApi.fetchUsers()
     }
 
-    override fun getUserByLogin(userId: String): GitHubUser? {
-        return null
+    override fun getUserByLogin(userId: String): Single<GitHubUser> {
+        return gitHubApi.fetchUserByLogin(userId)
     }
 }

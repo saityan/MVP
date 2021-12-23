@@ -3,9 +3,9 @@ package ru.geekbrains.mvp.mvpuser
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import ru.geekbrains.mvp.App.Navigation.router
 import ru.geekbrains.mvp.R
 import ru.geekbrains.mvp.data.GitHubUser
 import ru.geekbrains.mvp.data.GitHubUserRepositoryFactory
@@ -23,7 +23,6 @@ class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
         UserPresenter(
             userLogin = userLogin,
             userRepository = GitHubUserRepositoryFactory.create(),
-            router = router
         )
     }
 
@@ -34,7 +33,10 @@ class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
     }
 
     override fun showUser(user: GitHubUser) {
-        viewBinding.userLogin.text = user.login
+        viewBinding.userLogin.text = user.name
+        Glide.with(viewBinding.userAvatar.context)
+                .load(user.avatarUrl)
+                .into(viewBinding.userAvatar)
     }
 
     companion object {
