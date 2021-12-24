@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.geekbrains.mvp.App.Navigation.navigatorHolder
 import ru.geekbrains.mvp.App.Navigation.router
-import ru.geekbrains.mvp.navigation.CustomNavigator
 import ru.geekbrains.mvp.mvpusers.UsersScreen
+import ru.geekbrains.mvp.navigation.CustomNavigator
 
 class MainActivity : AppCompatActivity() {
     private val navigator = CustomNavigator(activity = this, R.id.content)
