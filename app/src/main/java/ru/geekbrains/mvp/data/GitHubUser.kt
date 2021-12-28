@@ -1,19 +1,32 @@
 package ru.geekbrains.mvp.data
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = "GitHubUserTable")
 data class GitHubUser(
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo
     @SerializedName("id")
-    val id: String? = null,
+    val id: String = "",
+
+    @ColumnInfo
     @SerializedName("login")
     val login: String? = null,
+
+    @ColumnInfo
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
-    @SerializedName("type")
-    val type: String = "",
-    @SerializedName("name")
-    val name: String = ""
+
+    @ColumnInfo
+    @SerializedName("node_id")
+    val node_id: String? = null,
 ) : Parcelable

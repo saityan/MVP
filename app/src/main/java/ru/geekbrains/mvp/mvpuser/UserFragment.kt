@@ -33,7 +33,7 @@ class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
     }
 
     override fun showUser(user: GitHubUser) {
-        viewBinding.userLogin.text = user.name
+        viewBinding.userLogin.text = user.node_id
         Glide.with(viewBinding.userAvatar.context)
                 .load(user.avatarUrl)
                 .into(viewBinding.userAvatar)
