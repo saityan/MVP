@@ -7,21 +7,4 @@ import ru.geekbrains.mvp.data.GitHubUserRepository
 
 class UserPresenter(
     private val userLogin: String,
-    private val userRepository: GitHubUserRepository,
-) : MvpPresenter<UserView>() {
-
-    override fun onFirstViewAttach() {
-        updateContent()
-    }
-
-    private fun updateContent() {
-        userRepository.getUserByLogin(userLogin)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    viewState.showUser(it)
-                },{
-                    val errorMessage = it.message
-                })
-    }
-}
+) : MvpPresenter<UserView>() {}
