@@ -24,8 +24,21 @@ data class GitHubUser(
     @ColumnInfo
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
+) : Parcelable
+
+@Parcelize
+@Entity(tableName = "GitHubUserRepositoryTable")
+data class GitHubUserRepositories(
+    @PrimaryKey
+    @ColumnInfo
+    @SerializedName("id")
+    val id: String,
 
     @ColumnInfo
-    @SerializedName("node_id")
-    val node_id: String? = null,
+    @SerializedName("login")
+    val login: String? = null,
+
+    @ColumnInfo
+    @SerializedName("name")
+    val name: String? = null,
 ) : Parcelable

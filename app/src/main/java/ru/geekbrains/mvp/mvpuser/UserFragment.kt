@@ -7,6 +7,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.mvp.App
 import ru.geekbrains.mvp.R
+import ru.geekbrains.mvp.data.GitHubUserRepositories
 import ru.geekbrains.mvp.databinding.UserFragmentViewBinding
 
 class UserFragment: MvpAppCompatFragment(R.layout.user_fragment_view), UserView {
@@ -40,11 +41,12 @@ class UserFragment: MvpAppCompatFragment(R.layout.user_fragment_view), UserView 
             }
     }
 
-    override fun showPhoto(url: String) {
-        presenter.loadPhoto(url, viewBinding.image)
-    }
-
-    override fun showName(name: String) {
-        viewBinding.textView.text = name
+    override fun showRepositories(repositories: List<GitHubUserRepositories>) {
+        val repos = StringBuilder()
+        for (repo in repositories) {
+            repos.append(repo.name)
+            repos.append("\n")
+        }
+        viewBinding.textView.text = repos
     }
 }
