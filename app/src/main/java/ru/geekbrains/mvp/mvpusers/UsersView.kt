@@ -6,11 +6,6 @@ import ru.geekbrains.mvp.data.GitHubUser
 
 interface UsersView : MvpView {
 
-    /**
-     * Показывает список пользователей.
-     * @param users список пользователей
-     */
     @SingleState
     fun showUsers(users: List<GitHubUser>)
-
 }

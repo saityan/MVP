@@ -1,27 +1,39 @@
 package ru.geekbrains.mvp.mvpuser
 
+import android.widget.ImageView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.geekbrains.mvp.data.GitHubUserRepository
+import javax.inject.Inject
 
-class UserPresenter(
-    private val userLogin: String,
-    private val userRepository: GitHubUserRepository,
-) : MvpPresenter<UserView>() {
+class UserPresenter : MvpPresenter<UserView>() {
 
-    override fun onFirstViewAttach() {
-        updateContent()
+    @Inject
+    lateinit var glideWrapper: GlideWrapper
+
+    @Inject
+    lateinit var repository: GitHubUserRepository
+
+    private lateinit var userLogin: String
+
+    fun init(userLogin: String) {
+        this.userLogin = userLogin
     }
 
-    private fun updateContent() {
-        userRepository.getUserByLogin(userLogin)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    viewState.showUser(it)
-                },{
-                    val errorMessage = it.message
-                })
+    override fun onFirstViewAttach() {
+        repository.getUserByLogin(userLogin)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.showName(it.login!!)
+                viewState.showPhoto(it.avatarUrl!!)
+            },{
+
+            })
+    }
+
+    fun loadPhoto(url: String, imageView: ImageView){
+        glideWrapper.loadImage(url, imageView)
     }
 }

@@ -3,40 +3,30 @@ package ru.geekbrains.mvp.mvpuser
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import ru.geekbrains.mvp.App
 import ru.geekbrains.mvp.R
-import ru.geekbrains.mvp.data.GitHubUser
-import ru.geekbrains.mvp.data.GitHubUserRepositoryFactory
-import ru.geekbrains.mvp.databinding.ViewUserBinding
+import ru.geekbrains.mvp.databinding.UserFragmentViewBinding
 
-class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
+class UserFragment: MvpAppCompatFragment(R.layout.user_fragment_view), UserView {
 
-    private lateinit var viewBinding: ViewUserBinding
+    private lateinit var viewBinding: UserFragmentViewBinding
 
     private val userLogin: String by lazy {
         arguments?.getString(ARG_USER_LOGIN).orEmpty()
     }
 
     private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(
-            userLogin = userLogin,
-            userRepository = GitHubUserRepositoryFactory.create(),
-        )
+        UserPresenter().apply {
+            init(userLogin)
+            App.instance.component.provideUserComponent().build().inject(this)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = ViewUserBinding.bind(view)
-        viewBinding.userLogin.text = userLogin
-    }
-
-    override fun showUser(user: GitHubUser) {
-        viewBinding.userLogin.text = user.node_id
-        Glide.with(viewBinding.userAvatar.context)
-                .load(user.avatarUrl)
-                .into(viewBinding.userAvatar)
+        viewBinding = UserFragmentViewBinding.bind(view)
     }
 
     companion object {
@@ -48,5 +38,13 @@ class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
                     putString(ARG_USER_LOGIN, userId)
                 }
             }
+    }
+
+    override fun showPhoto(url: String) {
+        presenter.loadPhoto(url, viewBinding.image)
+    }
+
+    override fun showName(name: String) {
+        viewBinding.textView.text = name
     }
 }
