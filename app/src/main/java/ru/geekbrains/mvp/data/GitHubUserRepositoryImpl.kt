@@ -27,6 +27,6 @@ class GitHubUserRepositoryImpl
     }
 
     override fun getUserByLogin(userId: String): Single<GitHubUser> {
-        return roomDb.getGitHubUserDao().getUserByLogin(userId)
+        return gitHubApi.fetchUserByLogin(userId)
     }
 }

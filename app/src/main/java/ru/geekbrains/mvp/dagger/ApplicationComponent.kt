@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.geekbrains.mvp.MainActivity
-import ru.geekbrains.mvp.mvpuser.UserPresenter
+import ru.geekbrains.mvp.mvpuser.dagger.UserComponent
 import ru.geekbrains.mvp.mvpusers.UsersPresenter
 import javax.inject.Singleton
 
@@ -18,7 +18,10 @@ import javax.inject.Singleton
         RoomModule::class
     ])
 
-public abstract interface ApplicationComponent {
+interface ApplicationComponent {
+
+    fun provideUserComponent(): UserComponent.Builder
+
     @Component.Builder
     interface Builder {
 
@@ -29,6 +32,5 @@ public abstract interface ApplicationComponent {
     }
 
     fun inject(activity: MainActivity)
-    fun inject(activity: UsersPresenter)
-    fun inject(activity: UserPresenter)
+    fun inject(presenter: UsersPresenter)
 }
