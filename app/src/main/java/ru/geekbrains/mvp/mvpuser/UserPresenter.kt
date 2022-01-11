@@ -1,6 +1,6 @@
 package ru.geekbrains.mvp.mvpuser
 
-import android.widget.ImageView
+import android.util.Log
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
@@ -22,18 +22,13 @@ class UserPresenter : MvpPresenter<UserView>() {
     }
 
     override fun onFirstViewAttach() {
-        repository.getUserByLogin(userLogin)
+        repository.getUserRepositories(userLogin)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                viewState.showName(it.login!!)
-                viewState.showPhoto(it.avatarUrl!!)
+                viewState.showRepositories(it)
             },{
-
+                Log.d("myLogs", it.toString())
             })
-    }
-
-    fun loadPhoto(url: String, imageView: ImageView){
-        glideWrapper.loadImage(url, imageView)
     }
 }
