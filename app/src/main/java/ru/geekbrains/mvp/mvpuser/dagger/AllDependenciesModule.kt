@@ -14,5 +14,4 @@ class AllDependenciesModule {
     fun provideGlideWrapper(context: Context): GlideWrapper {
         return GlideWrapper(context)
     }
-
 }
