@@ -22,5 +22,4 @@ class UsersAdapter(private val onUserClickListener: OnUserClickListener?): ListA
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) =
         holder.bind(getItem(position), onUserClickListener)
-
 }
