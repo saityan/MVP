@@ -14,7 +14,6 @@ class App: Application() {
         component = DaggerApplicationComponent.builder()
             .setContext(this)
             .build()
-
     }
 
     companion object{
