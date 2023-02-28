@@ -11,7 +11,7 @@ import javax.inject.Named
 @Module
 class RepositoryModule {
     @Provides
-    fun provideRepository(@Named("prod") api: GitHubApi, dbStorage: DBStorage): GitHubUserRepository {
+    fun provideRepository(@Named("baseAPI") api: GitHubApi, dbStorage: DBStorage): GitHubUserRepository {
         return GitHubUserRepositoryImpl(api, dbStorage)
     }
 }
